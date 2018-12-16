@@ -19,4 +19,7 @@ class PUZZLEPLATFORMS_API AMovingPlatform : public AStaticMeshActor
 
 	protected:
 		virtual void Tick(float DeltaTime) override; 	
+	
+	private:
+		float speed = 50;
 };

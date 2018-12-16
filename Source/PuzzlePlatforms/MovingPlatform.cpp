@@ -11,6 +11,12 @@ void AMovingPlatform::Tick(float DeltaTime) {
     Super::Tick(DeltaTime);
 
     FVector Location = GetActorLocation();
-    Location += FVector(5 * DeltaTime, 0, 0);
+
+    if (((Location.X >= 660.0) && speed > 0) || ((Location.X <= 120.0) && speed < 0)) {
+        speed = speed * -1;
+    }   
+    
+    Location += FVector(speed * DeltaTime, 0, 0);
+    
     SetActorLocation(Location);
 }
