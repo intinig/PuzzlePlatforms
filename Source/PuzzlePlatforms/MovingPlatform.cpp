@@ -2,21 +2,47 @@
 
 #include "MovingPlatform.h"
 
-AMovingPlatform::AMovingPlatform() {
+#define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White,text)
+
+AMovingPlatform::AMovingPlatform()
+{
     PrimaryActorTick.bCanEverTick = true;
     SetMobility(EComponentMobility::Movable);
 }
 
-void AMovingPlatform::Tick(float DeltaTime) {
+void AMovingPlatform::BeginPlay()
+{
+    Super::BeginPlay();
+
+    if (HasAuthority())
+    {
+        SetReplicates(true);
+        SetReplicateMovement(true);
+    }
+
+    GlobalStartLocation = GetActorLocation();
+    GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
+
+}
+
+void AMovingPlatform::Tick(float DeltaTime)
+{
     Super::Tick(DeltaTime);
 
-    FVector Location = GetActorLocation();
+    if (HasAuthority())
+    {
+        float distance = FVector::Dist(GetActorLocation(), GlobalTargetLocation);
+        
+        if (distance < 10) {
+            FVector SwitchLocation = GlobalStartLocation;
+            GlobalStartLocation = GlobalTargetLocation;
+            GlobalTargetLocation = SwitchLocation;
+        }
 
-    if (((Location.X >= 660.0) && Speed > 0) || ((Location.X <= 120.0) && Speed < 0)) {
-        Speed = Speed * -1;
-    }   
-    
-    Location += FVector(Speed * DeltaTime, 0, 0);
-    
-    SetActorLocation(Location);
+        FVector Direction = (GlobalTargetLocation - GlobalStartLocation).GetSafeNormal();        
+        
+        FVector Location = GetActorLocation() + Direction * Speed * DeltaTime;
+        
+        SetActorLocation(Location);
+    }
 }
