@@ -10,6 +10,17 @@ AMovingPlatform::AMovingPlatform()
     SetMobility(EComponentMobility::Movable);
 }
 
+void AMovingPlatform::DisableMovement() 
+{
+    StoredSpeed = Speed;
+    Speed = 0;
+}
+
+void AMovingPlatform::EnableMovement() 
+{
+    Speed = StoredSpeed;
+}
+
 void AMovingPlatform::BeginPlay()
 {
     Super::BeginPlay();

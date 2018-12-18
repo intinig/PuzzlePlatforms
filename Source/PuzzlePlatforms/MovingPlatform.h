@@ -17,6 +17,12 @@ class PUZZLEPLATFORMS_API AMovingPlatform : public AStaticMeshActor
   public:
 	AMovingPlatform();
 
+	UFUNCTION(BlueprintCallable)
+	void EnableMovement();
+
+	UFUNCTION(BlueprintCallable)
+	void DisableMovement();
+
 	// The speed at which platform moves (m/s)
 	UPROPERTY(EditAnywhere)
 	float Speed = 50;
@@ -32,4 +38,5 @@ class PUZZLEPLATFORMS_API AMovingPlatform : public AStaticMeshActor
   private:
 	FVector GlobalTargetLocation;
 	FVector GlobalStartLocation;
+	float StoredSpeed = 0;
 };
