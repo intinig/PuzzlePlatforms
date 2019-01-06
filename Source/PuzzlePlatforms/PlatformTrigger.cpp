@@ -42,16 +42,13 @@ void APlatformTrigger::OnOverlapBegin(class UPrimitiveComponent *OverlappedComp,
 {
 	if (!ensure(MovingPlatform != nullptr)) return;
 
-	MovingPlatform->EnableMovement();
-
-	
+	MovingPlatform->AddActiveTrigger();	
 }
 
 void APlatformTrigger::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) 
 {
 	if (!ensure(MovingPlatform != nullptr)) return;
 
-	MovingPlatform->DisableMovement();
-
+	MovingPlatform->RemoveActiveTrigger();
 }
 

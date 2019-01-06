@@ -21,6 +21,27 @@ void AMovingPlatform::EnableMovement()
     Speed = StoredSpeed;
 }
 
+void AMovingPlatform::Trigger(int Step = 1)
+{
+    Triggers = Triggers + Step;
+    print (FString::FromInt(Triggers));
+    if (Triggers >= ActiveTriggers) {
+        EnableMovement();
+    } else {
+        DisableMovement();
+    }
+}
+
+void AMovingPlatform::AddActiveTrigger()
+{
+    this->Trigger(1);
+}
+
+void AMovingPlatform::RemoveActiveTrigger()
+{
+    this->Trigger(-1);
+}
+
 void AMovingPlatform::BeginPlay()
 {
     Super::BeginPlay();
