@@ -48,6 +48,9 @@ class PUZZLEPLATFORMS_API AMovingPlatform : public AStaticMeshActor
 	UPROPERTY(EditAnywhere)
 	int ActiveTriggers = 1;
 
+	UPROPERTY(EditAnywhere)
+	bool bFreeMovement = true;
+
 	int Triggers = 0;
 
 	void EnableMovement();

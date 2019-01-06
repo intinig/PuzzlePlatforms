@@ -8,6 +8,7 @@ AMovingPlatform::AMovingPlatform()
 {
     PrimaryActorTick.bCanEverTick = true;
     SetMobility(EComponentMobility::Movable);
+
 }
 
 void AMovingPlatform::DisableMovement() 
@@ -55,6 +56,9 @@ void AMovingPlatform::BeginPlay()
     GlobalStartLocation = GetActorLocation();
     GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
 
+    if (!bFreeMovement) {
+        this->DisableMovement();
+    }
 }
 
 void AMovingPlatform::Tick(float DeltaTime)

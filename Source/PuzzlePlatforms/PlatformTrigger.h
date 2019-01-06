@@ -24,8 +24,8 @@ class PUZZLEPLATFORMS_API APlatformTrigger : public AActor
 	class UBoxComponent *TriggerVolume;
 
 	UPROPERTY(EditAnywhere)
-	class AMovingPlatform *MovingPlatform;
-	
+	TArray<class AMovingPlatform *> MovingPlatforms;
+
   public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

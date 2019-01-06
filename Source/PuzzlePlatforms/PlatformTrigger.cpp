@@ -40,15 +40,23 @@ void APlatformTrigger::Tick(float DeltaTime)
 
 void APlatformTrigger::OnOverlapBegin(class UPrimitiveComponent *OverlappedComp, class AActor *OtherActor, class UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult)
 {
-	if (!ensure(MovingPlatform != nullptr)) return;
-
-	MovingPlatform->AddActiveTrigger();	
+for (auto& MovingPlatform : MovingPlatforms)
+	{
+		if (ensure(MovingPlatform != nullptr)) {
+			MovingPlatform->AddActiveTrigger();
+		}
+	}
 }
 
 void APlatformTrigger::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) 
 {
-	if (!ensure(MovingPlatform != nullptr)) return;
+	for (auto& MovingPlatform : MovingPlatforms)
+	{
+		if (ensure(MovingPlatform != nullptr)) {
+			MovingPlatform->RemoveActiveTrigger();
+		}
+	}
+}	
 
-	MovingPlatform->RemoveActiveTrigger();
-}
+	
 
