@@ -4,17 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "Engine/StaticMeshActor.h"
+
 #include "MovingPlatform.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class PUZZLEPLATFORMS_API AMovingPlatform : public AStaticMeshActor
 {
 	GENERATED_BODY()
 
-  public:
+public:
 	AMovingPlatform();
 
 	UFUNCTION(BlueprintCallable)
@@ -34,12 +35,10 @@ class PUZZLEPLATFORMS_API AMovingPlatform : public AStaticMeshActor
 	UPROPERTY(EditAnywhere)
 	int ActiveTriggers = 1;
 
-  protected:
-	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaTime) override;
+	void Tick(float DeltaTime) override;
+	void BeginPlay() override;
 
-  private:
+private:
 	FVector GlobalTargetLocation;
 	FVector GlobalStartLocation;
-
 };
