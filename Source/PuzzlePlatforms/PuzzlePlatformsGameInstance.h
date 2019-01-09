@@ -22,7 +22,7 @@ public:
 	void Host();
 
 	UFUNCTION(Exec)
-	int Join(const FString& IpAddress);
+	void Join(const FString& IpAddress);
 
 protected:
 	void Init();

@@ -5,7 +5,6 @@
 #include "Engine/Engine.h"
 #include "EngineGlobals.h"
 
-
 #define print(text) \
 	if (GEngine)    \
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::White, text)
@@ -34,7 +33,7 @@ void UPuzzlePlatformsGameInstance::Init()
 	print("Hello, Init");
 }
 
-int UPuzzlePlatformsGameInstance::Join(const FString& IpAddress)
+void UPuzzlePlatformsGameInstance::Join(const FString& IpAddress)
 {
 	print(FString::Printf(TEXT("Joining %s"), *IpAddress));
 
@@ -44,6 +43,4 @@ int UPuzzlePlatformsGameInstance::Join(const FString& IpAddress)
 		return;
 
 	World->ServerTravel("/Game/ThirdPersonCPP/Maps/ThirdPersonExampleMap?listen");
-
-	return 0;
 }
